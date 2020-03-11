@@ -102,4 +102,7 @@ public class DrivetrainConfig extends Subsystem {
   {
     return shifters.get() == Value.kForward;
   }
+  public boolean isLowGear(){
+    return shifters.get() == Value.kReverse;
+  }
 }

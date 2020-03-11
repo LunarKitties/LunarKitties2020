@@ -242,12 +242,25 @@ public class Robot extends TimedRobot {
     mIndexConfig.log();
     mAccumConfig.log();
     mNavX.log();
-    if(mLiftConfig.brakeEngaged()){
+
+    if (mLiftConfig.brakeEngaged()){
       mLeds.setColor(LEDsConfig.RED);
-    }else{
+    } else {
+      mLeds.setColor(LEDsConfig.RAINBOW);
+    }
+
+    if (mDrivetrainConfig.isHighGear()){
+      mLeds.setColor(LEDsConfig.RAINBOW);
+    } else {
       mLeds.setColor(LEDsConfig.RAINBOW);
     }
     
+    if (mDrivetrainConfig.isLowGear()){
+      mLeds.setColor(LEDsConfig.GOLD_PATTERN);
+    } else {
+      mLeds.setColor(LEDsConfig.RAINBOW);
+    }
+
   }
 
   /**

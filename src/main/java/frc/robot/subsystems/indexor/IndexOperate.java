@@ -33,16 +33,15 @@ public class IndexOperate extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    XboxController xbox = Robot.m_oi.getXboxController2();
-
-    boolean a = xbox.getAButtonPressed();
-    boolean b = xbox.getXButtonPressed();
     boolean ballHere = Robot.mIndexConfig.ballHere();
+    boolean colorSeesBall = Robot.mIndexConfig.colorSeesBall();
     currEncDist = Math.abs(Robot.mIndexConfig.indexEncoder());
 
-    if(ballHere && !currBall){ //
-      targetEncDist = currEncDist + spacedEncDist;
-      currBall = true;
+    if(ballHere || colorSeesBall){ //
+      if(!currBall){
+        targetEncDist = currEncDist + spacedEncDist;
+        currBall = true;
+      }
     }
 
     if (currBall){
@@ -66,7 +65,7 @@ public class IndexOperate extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.mShooterConfig.stop();
+    Robot.mIndexConfig.stop();
   }
 
   // Called when another command which requires one or more of the same

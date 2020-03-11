@@ -39,7 +39,7 @@ public class TurretOperate extends Command {
   protected void execute() {
     XboxController xbox = Robot.m_oi.getXboxController2();
     double rStickX = xbox.getX(Hand.kRight);
-
+    /*
     targetFound = Robot.mLimelight.targetAcquired();
     if(targetFound && Robot.mNavX.getAngle() < 55 && Robot.mNavX.getAngle() > -55){
       //use limelight
@@ -68,7 +68,13 @@ public class TurretOperate extends Command {
     }else if (rStickX < -0.7){
         speed = 0.3;
     }
-        
+        */
+    speed = rStickX;
+    if (speed > 0.6){
+      speed = 0.6;
+    }else if (speed < -0.6){
+      speed = -0.6;
+    }
     Robot.mTurretConfig.run(speed);
   }
 
@@ -81,7 +87,7 @@ public class TurretOperate extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.mShooterConfig.stop();
+    Robot.mTurretConfig.stop();
   }
 
   // Called when another command which requires one or more of the same

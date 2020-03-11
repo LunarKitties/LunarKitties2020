@@ -14,6 +14,7 @@ public class ShiftHigh extends Command {
   public ShiftHigh() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.mDrivetrainConfig);
+    
   }
 
   // Called just before this Command runs the first time

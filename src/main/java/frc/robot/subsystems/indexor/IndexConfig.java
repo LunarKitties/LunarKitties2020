@@ -71,6 +71,26 @@ public class IndexConfig extends Subsystem {
     return m_colorSensor.getGreen();
   }
 
+  public boolean colorSeesBall(){
+    int red = getRed();
+    int blue = getBlue();
+    int green = getGreen();
+    boolean redInRange = false;
+    boolean blueInRange = false;
+    boolean greenInRange = false;
+
+    if(red < 400 && red > 200){
+      redInRange = true;
+    }
+    if(blue < 500 && blue > 300){
+      blueInRange = true;
+    }
+    if(green < 600 && green > 400){
+      greenInRange = true;
+    }
+    return redInRange && blueInRange && greenInRange;
+  }
+
   public void stop(){
     indexMotor.set(ControlMode.PercentOutput, 0);
     preShootMotor.set(ControlMode.PercentOutput, 0);
