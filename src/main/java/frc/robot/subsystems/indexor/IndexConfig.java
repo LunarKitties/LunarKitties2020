@@ -79,6 +79,9 @@ public class IndexConfig extends Subsystem {
   public void log(){
     SmartDashboard.putNumber("Index Encoder", indexEncoder());
     SmartDashboard.putBoolean("Index Ball Switch", ballHere());
+    SmartDashboard.putNumber("Red", getRed());
+    SmartDashboard.putNumber("Blue", getBlue());
+    SmartDashboard.putNumber("Green", getGreen());
   }
 
 
