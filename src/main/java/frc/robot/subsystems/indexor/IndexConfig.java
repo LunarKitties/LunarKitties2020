@@ -27,6 +27,7 @@ public class IndexConfig extends Subsystem {
     private final DigitalInput ballReadyLeft = new DigitalInput(ConfigMap.DIO_INDEX_LEFT_BALL_SWITCH);
 
     private final I2C.Port i2cPort = I2C.Port.kOnboard;
+
     private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
     
   @Override
@@ -42,21 +43,26 @@ public class IndexConfig extends Subsystem {
     return ballReadyRight.get() || ballReadyLeft.get();
   }
 
-  public void runBelts(){
-    indexMotor.set(ControlMode.PercentOutput, -0.8);
+  public void runBelts(double speed){
+    indexMotor.set(ControlMode.PercentOutput, speed);
   }
 
   public int indexEncoder(){
     return indexEnc.get();
   }
 
-  public void runPreShoot(){
-    preShootMotor.set(ControlMode.PercentOutput, 1);
+  public void runPreShoot(double speed){
+    preShootMotor.set(ControlMode.PercentOutput, speed);
   }
 
   public void dumpBalls(){
-    runPreShoot();
-    runBelts();
+    runPreShoot(1);
+    runBelts(-0.8);
+  }
+
+  public void unShoot(){
+    runPreShoot(-1);
+    runBelts(0.8);
   }
 
   public int getRed(){
@@ -78,14 +84,14 @@ public class IndexConfig extends Subsystem {
     boolean redInRange = false;
     boolean blueInRange = false;
     boolean greenInRange = false;
-
-    if(red < 400 && red > 200){
+    
+    if(red < 20){
       redInRange = true;
     }
-    if(blue < 500 && blue > 300){
+    if(blue < 20){
       blueInRange = true;
     }
-    if(green < 600 && green > 400){
+    if(green < 20){
       greenInRange = true;
     }
     return redInRange && blueInRange && greenInRange;

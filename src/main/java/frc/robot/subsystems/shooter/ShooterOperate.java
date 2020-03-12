@@ -26,17 +26,26 @@ public class ShooterOperate extends Command {
   @Override
   protected void execute() {
     XboxController xbox = Robot.m_oi.getXboxController2();
-
-    boolean a = xbox.getAButtonPressed();
-    boolean b = xbox.getBButtonPressed();
+    int dPad = xbox.getPOV();
 
     double spdFromDist = Robot.mShooterConfig.getSpeed();
 
     
-    if (a){
-      Robot.mShooterConfig.setSpeed(spdFromDist); 
-    }if (b){
-      Robot.mShooterConfig.stop();
+    //DPAD UP
+    if (dPad < 45 && dPad > 315){
+      Robot.mShooterConfig.setSpeed(-5000); 
+    }
+    //DPAD RIGHT
+    if (dPad < 135 && dPad > 45){
+      Robot.mShooterConfig.setSpeed(-4200); 
+    }
+    //
+    if (dPad < 240 && dPad > 135){
+      Robot.mShooterConfig.stop(); 
+    }
+
+    if (dPad < 315 && dPad > 245){
+      Robot.mShooterConfig.setSpeed(-3675); 
     }
     
   }  

@@ -17,8 +17,9 @@ public class IndexOperate extends Command {
 
   double currEncDist, targetEncDist;
 
-  static double spacedEncDist = 3475;
-  boolean currBall = false;
+  static double spacedEncDist = 3500;
+  int ballCount;
+  boolean currBall = false, moveBall = false;
 
   public IndexOperate() {
     requires(Robot.mIndexConfig);
@@ -33,27 +34,44 @@ public class IndexOperate extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    XboxController xbox = Robot.m_oi.getXboxController2();
+    //Speed is based on the triggers. Left Trigger is reverse, Right Trigger is forward
+    boolean a = xbox.getAButton();
+    boolean b = xbox.getBButton();
+
     boolean ballHere = Robot.mIndexConfig.ballHere();
     boolean colorSeesBall = Robot.mIndexConfig.colorSeesBall();
     currEncDist = Math.abs(Robot.mIndexConfig.indexEncoder());
 
-    if(ballHere || colorSeesBall){ //
+    
+    if(colorSeesBall){ //
       if(!currBall){
-        targetEncDist = currEncDist + spacedEncDist;
         currBall = true;
       }
     }
-
-    if (currBall){
+    if (currBall && !colorSeesBall){
+      targetEncDist = currEncDist + spacedEncDist;
+      moveBall = true;
+      currBall = false;
+    }
+    if(moveBall){
       if(currEncDist < targetEncDist){
         //run the intake belts
-        Robot.mIndexConfig.runBelts();
+        Robot.mIndexConfig.runBelts(-0.8);
       }else{
-        currBall = false;
+        moveBall = false;
       }
     }else{
       Robot.mIndexConfig.stop();
     }
+    
+    if(a){
+      Robot.mIndexConfig.dumpBalls();
+    }else if(b){
+      Robot.mIndexConfig.unShoot();
+    }
+
+    
   }  
 
   // Make this return true when this Command no longer needs to run execute()

@@ -33,6 +33,12 @@ public class RunIntake extends Command {
     //Speed is based on the triggers. Left Trigger is reverse, Right Trigger is forward
     double rTrig = xbox.getTriggerAxis(Hand.kRight);
     double lTrig = xbox.getTriggerAxis(Hand.kLeft);
+    boolean x = xbox.getXButton();
+    boolean y = xbox.getYButton();
+    double speed = 0;
+    int AccumUp = 30;
+    int AccumDown = 500;
+
     posSpeed = rTrig;
     negSpeed = -lTrig;
     if(rTrig > lTrig){
@@ -40,6 +46,17 @@ public class RunIntake extends Command {
     }else{
       Robot.mAccumConfig.runIntake(negSpeed);
     }
+
+    if(y && Robot.mAccumConfig.accumEncoder() > AccumUp){
+      //go up
+      speed = -0.8;
+    }else if(x && Robot.mAccumConfig.accumEncoder() < AccumDown){
+      speed = 0.8;
+    }else{
+      speed = 0;
+    }
+    Robot.mAccumConfig.adjustAccum(speed);
+
     
   }  
 

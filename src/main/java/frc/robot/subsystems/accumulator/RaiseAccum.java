@@ -24,7 +24,6 @@ public class RaiseAccum extends Command {
   }
 
   // Called repeatedly when this Command is scheduled to run
-  @Override
   protected void execute() {
     double speed = 0;
     int AccumUp = 30;
@@ -47,7 +46,7 @@ public class RaiseAccum extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.mAccumConfig.stop();
+    Robot.mAccumConfig.adjustAccum(0);
   }
 
   // Called when another command which requires one or more of the same

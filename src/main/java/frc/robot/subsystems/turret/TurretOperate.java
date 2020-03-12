@@ -69,11 +69,11 @@ public class TurretOperate extends Command {
         speed = 0.3;
     }
         */
-    speed = rStickX;
-    if (speed > 0.6){
-      speed = 0.6;
-    }else if (speed < -0.6){
-      speed = -0.6;
+    speed = -rStickX;
+    if (speed > 0.7){
+      speed = 0.7;
+    }else if (speed < -0.7){
+      speed = -0.7;
     }
     Robot.mTurretConfig.run(speed);
   }

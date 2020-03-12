@@ -35,33 +35,30 @@ public class OI {
   // Joystick stick = new Joystick(port);
   // Button button = new JoystickButton(stick, buttonNumber);
 
-  public int 
-    a = 1,
-	b = 2,
-	x = 3,
-	y = 4,
-	rb = 6,
-	lb = 5,
-	start = 8,
-	back = 7,
-	rt = 3,
-	lt = 2,
-	dpad_up = 0,
-	dpad_right = 90,
-	dpad_down = 180,
-  dpad_left = 270;
+  public static final int A = 1;
+	public static final int B = 2;
+	public static final int X = 3;
+	public static final int Y = 4;
+	public static final int LB = 5;
+	public static final int RB = 6;
+	public static final int BACK = 7;
+	public static final int START = 8;
+	public static final int LEFT_STICK_BUTTON = 9;
+	public static final int RIGHT_STICK_BUTTON = 10;
+
 
   public XboxController xbox1 = new XboxController(0);
   public XboxController xbox2 = new XboxController(1);
 
-  Button btnDisengageBrake = new JoystickButton(xbox2, rb);
-  Button btnEngageBrake = new JoystickButton(xbox2, lb);
-  Button btnShiftWheelsHigh = new JoystickButton(xbox1, rb);
-  Button btnShiftWheelsLow = new JoystickButton(xbox1, lb);
+  Button btnDisengageBrake = new JoystickButton(xbox2, BACK);
+  Button btnEngageBrake = new JoystickButton(xbox2, LEFT_STICK_BUTTON);
+  Button btnShiftWheelsHigh = new JoystickButton(xbox1, RB);
+  Button btnShiftWheelsLow = new JoystickButton(xbox1, LB);
 
-  Button btnRaiseAccum = new JoystickButton(xbox2, y);
-  Button btnLowerAccum = new JoystickButton(xbox2, x);
-  Button btnDumpBalls = new JoystickButton(xbox2, rb);
+  //Button btnRaiseAccum = new JoystickButton(xbox2, Y);
+  //Button btnLowerAccum = new JoystickButton(xbox2, X);
+  //Button btnDumpBalls = new JoystickButton(xbox2, RB);
+  //SET SPEED ON LB?
 
   public OI()
   {
@@ -70,9 +67,9 @@ public class OI {
     btnShiftWheelsHigh.whenPressed(new ShiftHigh());
     btnShiftWheelsLow.whenPressed(new ShiftLow());
     
-    btnRaiseAccum.whenPressed(new RaiseAccum());
-    btnLowerAccum.whenPressed(new LowerAccum());
-    btnDumpBalls.whileHeld(new DumpBalls());
+    //btnRaiseAccum.whenPressed(new RaiseAccum());
+    //btnLowerAccum.whenPressed(new LowerAccum());
+    //btnDumpBalls.whileHeld(new DumpBalls());
   }
   /**
    * Get the Xbox Controller plugged into port 0

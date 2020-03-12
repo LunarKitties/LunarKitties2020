@@ -100,7 +100,7 @@ public class ShooterConfig extends Subsystem {
 
     return mappedSlope * getDist() + mappedIntercept;
   }
-
+  
   public void stop(){
     shootMotor.stopMotor();
   }
